@@ -11,6 +11,8 @@ var path = require( 'path' );
 
 var app = expresss();
 
+var pepe = 7;
+
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
@@ -33,10 +35,6 @@ app.get('/users', user.list);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
-});
-
-http.createServer(ap).listen(app.get('port'), function(){
-	console.log('Hola a todos');
 });
 
 
