@@ -1,0 +1,13 @@
+block content
+  h1 Mis tareas
+  p
+  a(href='/tareas/nueva', class='btn primary') Incluir Nueva Tarea
+- if(docs.length)
+  table
+    tr
+      th Tarea
+        each tarea in docs
+          tr
+            td #{tarea.tarea}
+- else
+  p No tienes ninguna tarea
