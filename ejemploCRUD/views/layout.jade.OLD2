@@ -1,0 +1,8 @@
+doctype html
+html
+  head
+    title= title
+//    link(rel='stylesheet', href='bootstrap/dist/css/bootstrap.min.css')
+    link(rel='stylesheet', href='https://github.com/twbs/bootstrap/blob/master/dist/css/bootstrap-theme.min.css')
+  body
+    section.container!= body

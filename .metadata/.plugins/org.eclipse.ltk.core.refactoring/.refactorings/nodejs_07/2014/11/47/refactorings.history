@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move &apos;server5.js&apos; to &apos;nodejs_07&apos;" description="Move &apos;server5.js&apos; to &apos;nodejs_07&apos;" destination="/nodejs_07" element1="/nodejs_10/server5.js" flags="7" id="org.eclipse.ltk.core.refactoring.move.resources" resources="1" stamp="1416778528576" updateReferences="true"/>
+</session>

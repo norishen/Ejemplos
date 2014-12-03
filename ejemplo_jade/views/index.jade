@@ -1,0 +1,9 @@
+extends layout
+
+-var pepito = "Hola don pepito"
+block content
+  h1= title
+  p Welcome to #{title}
+  -brutos = { primero:'Garada K7',segundo:'Douglas M2',otro:'Jinray S1'}
+  -for bruto,clave in brutos
+   li #{clave} : #{bruto}

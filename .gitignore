@@ -1,0 +1,13 @@
+# Ignorando grupos de archivos individuales por extensión
+rutas/de/locación/*.extensión
+
+# Ignorando una Carpeta
+ruta/a/carpeta/ignorada
+
+# Ignorando un Archivo Individual
+ruta/a/archivo.ext
+
+# Ignorando JPG's y PNG's
+/*.jpg
+/*.jpeg
+/*.png
