@@ -1,0 +1,13 @@
+block content
+  h1 Mis Arduinos
+  p
+  a(href='/arduino/nuevo', class='btn primary') Incluir Nuevo Arduino
+- if(docs.length)
+  table
+    tr
+      th M_Arduino
+        each M_Arduino in docs
+          tr
+            td #{arduino.nombre}
+- else
+  p No tienes ningun Arduino
