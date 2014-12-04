@@ -1,0 +1,16 @@
+// arduino.js
+//=======================================================================
+
+block content
+  h1 #{title}
+  p
+  a(href='/arduino/new', class='btn primary') Incluir Nuevo Arduino
+- if(docs.length)
+  table
+    tr
+      th Arduino
+        each arduino in docs
+          tr
+            td #{arduino.arduino}
+- else
+  p No tienes ningun Arduino
