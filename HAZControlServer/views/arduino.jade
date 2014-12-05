@@ -1,14 +1,21 @@
 // arduino.js
 //=======================================================================
+//extends layout
 
 block content
-  h1 #{title}
-  p
-  a(href='/arduino/new', class='btn primary') Incluir Nuevo Arduino
+h1 #{title}
+p
+a(href='/arduino/new', class='btn primary') Incluir Nuevo Arduino
 - if(docs.length)
   table
     tr
-      th Arduino
+      th Nombre
+      th IP
+      th MAC
+      th NetMask
+      th Gateway
+      th DNS
+      th Uso
         each arduino in docs
           tr
             td #{arduino.nombre}

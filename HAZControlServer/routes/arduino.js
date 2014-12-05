@@ -17,14 +17,14 @@ module.exports = function(app) {
   	};
 
 	// view for create new Arduino
-  	formuNuevo = function(req, res) {
+  	function formuNuevo(req, res) {
   		res.render('arduinoNew.jade', {
     		title: 'Nuevo Arduino'
   		});
   	};
 
   	//POST - Insert a new Tshirt in the DB
-  	creaNuevo = function(req, res) {
+  	function creaNuevo(req, res) {
   		console.log(req.body);
     	var arduino = new Arduino({
    			nombre: 	req.body.nombre,
@@ -43,19 +43,21 @@ module.exports = function(app) {
   	};
 
   	//GET - Return a Tshirt with specified ID
-  	buscaUno = function(req, res) {
+  	function buscaUno(req, res) {
     	res.send('This is not implemented now');
   	};
   
   	//PUT - Update a register already exists
-  	modificaUno = function(req, res) {
+  	function modificaUno(req, res) {
     	res.send('This is not implemented now');
   	};
 
   	//DELETE - Delete a Tshirt with specified ID
-  	borraUno = function(req, res) {
+  	function borraUno(req, res) {
     	res.send('This is not implemented now');
   	};
+
+
 
   	//Link routes and functions
   	app.get( '/arduinos', muestraTodos );
