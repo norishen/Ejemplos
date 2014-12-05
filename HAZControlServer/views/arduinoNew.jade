@@ -1,12 +1,11 @@
+// arduinoNew.js
+//=======================================================================
 //extends layout
 
 h1 #{title}
 
 meta(charset="iso-8859-1")
 form( method='post', action='/arduino' )
-	fieldset
-	legend Incluir nuevo Arduino
-
 	div.clearfix
 	label Arduino
 		div.input
@@ -45,3 +44,6 @@ form( method='post', action='/arduino' )
 	div.actions
 		input(type='submit', value='Guardar', class='btn primary')
 		button(type='reset', class='btn') Cancelar
+
+div
+	a(href='/arduinos', class='btn primary') Regresar

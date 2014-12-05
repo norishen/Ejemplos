@@ -12,7 +12,7 @@ module.exports = function(app) {
   		Arduino.find({}, function (err, arduino) {
   			console.log('recupero: ' + arduino);
     		res.render('arduino.jade', {
-      			title: 'Vista index lista de los Arduinos',
+      			title: 'Lista de Arduinos',
       			docs: arduino
     		});
   		});
@@ -39,7 +39,7 @@ module.exports = function(app) {
     //--------------------------------------------------------
     //POST - Insert a new register in the DB
     function rescanArdus(req, res) {
-      console.log('Rescan: ' + req.body);
+      console.log('rescanArdus: ' + req.body);
 
       res.redirect('/arduinos');
     };
@@ -47,15 +47,16 @@ module.exports = function(app) {
 
   	//POST - Insert a new register in the DB
   	function creaNuevo(req, res) {
-  		console.log(req.body);
+  		console.log('creaNuevo: ' + req.body);
+
     	var arduino = new Arduino({
    			nombre: 	req.body.nombre,
- 			ip: 		req.body.ip,
-    		mac: 		req.body.mac,
+ 			  ip: 		  req.body.ip,
+    		mac:      req.body.mac,
 		    netmask: 	req.body.netmask,
     		gateway: 	req.body.gateway,
-		    dns: 		req.body.dns,
-    		uso: 		req.body.uso
+		    dns:      req.body.dns,
+    		uso:      req.body.uso
     		});
 
 	  	arduino.save(function (err) {
