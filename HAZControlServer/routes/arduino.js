@@ -4,9 +4,11 @@
 module.exports = function(app) {
   	var Arduino = require('../models/arduino.js');
 
-  
+    //--------------------------------------------------------
+    //----- Links routes ------
+    //--------------------------------------------------------
   	//View - Return all Arduinos in the DB
-  	function muestraTodos(req, res) {
+  	function formuTodos(req, res) {
   		Arduino.find({}, function (err, arduino) {
   			console.log('recupero: ' + arduino);
     		res.render('arduino.jade', {
@@ -16,14 +18,34 @@ module.exports = function(app) {
   		});
   	};
 
-	// view for create new Arduino
+    // view for create new Arduino
   	function formuNuevo(req, res) {
   		res.render('arduinoNew.jade', {
     		title: 'Nuevo Arduino'
   		});
   	};
 
-  	//POST - Insert a new Tshirt in the DB
+    // view for create new Arduino
+    function formuRescan(req, res) {
+      res.render('arduinoRescan.jade', {
+        title: 'Rescan Arduinos'
+      });
+    };
+    //--------------------------------------------------------
+
+
+    //--------------------------------------------------------
+    //----- Links operativa ------
+    //--------------------------------------------------------
+    //POST - Insert a new register in the DB
+    function rescanArdus(req, res) {
+      console.log('Rescan: ' + req.body);
+
+      res.redirect('/arduinos');
+    };
+
+
+  	//POST - Insert a new register in the DB
   	function creaNuevo(req, res) {
   		console.log(req.body);
     	var arduino = new Arduino({
@@ -42,7 +64,7 @@ module.exports = function(app) {
     	});
   	};
 
-  	//GET - Return a Tshirt with specified ID
+  	//GET - Return a register with specified ID
   	function buscaUno(req, res) {
     	res.send('This is not implemented now');
   	};
@@ -52,18 +74,22 @@ module.exports = function(app) {
     	res.send('This is not implemented now');
   	};
 
-  	//DELETE - Delete a Tshirt with specified ID
+  	//DELETE - Delete a register with specified ID
   	function borraUno(req, res) {
     	res.send('This is not implemented now');
   	};
-
+    //--------------------------------------------------------
 
 
   	//Link routes and functions
-  	app.get( '/arduinos', muestraTodos );
+  	app.get( '/arduinos', formuTodos );
   	app.get( '/arduino/new', formuNuevo );
-  	app.get( '/arduino/:id', buscaUno );
-  	app.post( '/arduino', creaNuevo );
+    app.get( '/arduino/rescan', formuRescan );
+
+  	// Links operativa
+    app.post( '/arduino/rescan', rescanArdus );
+    app.get( '/arduino/:id', buscaUno );
+    app.post( '/arduino', creaNuevo );
   	app.put( '/arduino/:id', modificaUno );
   	app.delete( '/arduino/:id', borraUno );
 }

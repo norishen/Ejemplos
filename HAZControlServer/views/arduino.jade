@@ -5,7 +5,11 @@
 block content
 h1 #{title}
 p
-a(href='/arduino/new', class='btn primary') Incluir Nuevo Arduino
+  div
+    a(href='/arduino/new', class='btn primary') Nuevo Arduino
+    p
+    a(href='/arduino/rescan', class='btn') Rescan
+
 - if(docs.length)
   table
     tr
