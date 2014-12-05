@@ -8,12 +8,11 @@ module.exports = function(app) {
   	//View - Return all Arduinos in the DB
   	function muestraTodos(req, res) {
   		Arduino.find({}, function (err, arduino) {
-  			console.log(arduino);
-  			return res.send(arduino);
-//    		res.render('arduino.jade', {
-//      			title: 'Vista index lista de los Arduinos',
-//      			docs: arduino
-//    		});
+  			console.log('recupero: ' + arduino);
+    		res.render('arduino.jade', {
+      			title: 'Vista index lista de los Arduinos',
+      			docs: arduino
+    		});
   		});
   	};
 
@@ -26,6 +25,7 @@ module.exports = function(app) {
 
   	//POST - Insert a new Tshirt in the DB
   	creaNuevo = function(req, res) {
+  		console.log(req.body);
     	var arduino = new Arduino({
    			nombre: 	req.body.nombre,
  			ip: 		req.body.ip,
@@ -36,7 +36,7 @@ module.exports = function(app) {
     		uso: 		req.body.uso
     		});
 
-  		arduino.save(function (err) {
+	  	arduino.save(function (err) {
     		if (!err) res.redirect('/arduinos'); 
     		else res.redirect('/arduino/new');
     	});

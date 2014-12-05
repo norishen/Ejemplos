@@ -32,7 +32,7 @@ if ('development' == app.get('env')) {
 var routes = require('./routes/arduino')(app);
 
 // Entorno Mongoose
-mongoose.connect('mongodb://' + config.mongo.host + ':' + config.mongo.port + '/HZControlServer', function(err){
+mongoose.connect('mongodb://' + config.mongo.host + ':' + config.mongo.port + '/HAZControlServer', function(err){
 	if (err) {
 		console.log('Error de conexion MongoDB' + err );
   } else {
