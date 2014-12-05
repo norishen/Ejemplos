@@ -1,11 +1,24 @@
-extends layout
+//extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
-
-  .datos
-    P Nombre: #{user.nombre}
-    P Primer Apellido: #{user.apell1}
-    P Segundo Apellido: #{user.apell2}
-
+  div
+    p Firmware: HAZControl v.1.0.3 #105 (24/04/2014) eep[0x6]
+    br 
+    p Configuracion del dispositivo: 
+    p ID Dev: H2801
+    p Direccion MAC: BE:EF:5B:63:2A:6B
+    p - Dir. [ip]: 10.28.35.1
+    p - [netmask]: 255.255.0.0
+    p - [gateway]: 10.28.24.1
+    p - [dns]: 10.28.2.100
+    br
+    p Configuracion de la bascula: 
+    p - [situacion]: E SUR: Entrada Remolacha
+    p - [tipoBascula] = 1
+    p - [baudios] = 9600
+    p - [confPuerto] = 0x6
+    p - Caracter [control] = 2(0x2)
+    p - [iniPeso] = 4
+    p - [lenPeso] = 5
+    p - estable [espera] = 700  
+    br

@@ -10,7 +10,7 @@ module.exports = function(app) {
   	//View - Return all Arduinos in the DB
   	function formuTodos(req, res) {
   		Arduino.find({}, function (err, arduino) {
-  			console.log('recupero: ' + arduino);
+
     		res.render('arduino.jade', {
       			title: 'Lista de Arduinos',
       			docs: arduino
@@ -39,8 +39,15 @@ module.exports = function(app) {
     //--------------------------------------------------------
     //POST - Insert a new register in the DB
     function rescanArdus(req, res) {
-      console.log('rescanArdus: ' + req.body);
+      console.log('rescanArdus: ' + req.body.red );
 
+      var urlArdu = {
+        addr: req.body.red,
+        port: "8080"
+      };
+
+      var datosArduino = require('../datosArduino.js')(urlArdu);
+      
       res.redirect('/arduinos');
     };
 
