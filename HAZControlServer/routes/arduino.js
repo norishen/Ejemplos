@@ -33,6 +33,57 @@ module.exports = function(app) {
     };
     //--------------------------------------------------------
 
+    function grabaArdu(options) {
+
+      var http = require('http');
+      http.get(options, function(res) {
+        var body = "";
+  
+        res.on( 'data', function(chunk) {
+          body += chunk;
+        }).on('end', function(){
+          var r = JSON.parse(body);
+
+          var ip = r.ip[0]+"."+r.ip[1]+"."
+                  +r.ip[2]+"."+r.ip[3];
+
+          var mac = r.mac[0].toString(16).toUpperCase()+":"
+                  +r.mac[1].toString(16).toUpperCase()+":"
+                  +r.mac[2].toString(16).toUpperCase()+":"
+                  +r.mac[3].toString(16).toUpperCase()+":"
+                  +r.mac[4].toString(16).toUpperCase()+":"
+                  +r.mac[5].toString(16).toUpperCase();
+
+          var nm = r.netmask[0]+"."+r.netmask[1]+"."
+                  +r.netmask[2]+"."+r.netmask[3];
+
+          var gw = r.gateway[0]+"."+r.gateway[1]+"."
+                  +r.gateway[2]+"."+r.gateway[3];
+
+          console.log("mac:"+mac+" ip:"+ip+" nm:"+nm+" gw:"+gw);
+
+          var arduino = new Arduino({
+            nombre:   r.nombre,
+            ip:       ip,
+            mac:      mac,
+            netmask:  nm,
+            gateway:  gw,
+            dns:      "1",
+            uso:      "1"
+            });
+
+          arduino.save(function (err) {
+            if (err) 
+              console.log("No grabo nada");
+          });
+
+        });
+
+      }).on('error', function(err) {
+        console.log('Error acceso a ' + options.host);
+      });
+    };
+
 
     //--------------------------------------------------------
     //----- Links operativa ------
@@ -41,15 +92,27 @@ module.exports = function(app) {
     function rescanArdus(req, res) {
       console.log('rescanArdus: ' + req.body.red );
 
-      var urlArdu = {
-        addr: req.body.red,
-        port: "8080"
+      var options = {
+        host: req.body.red,
+        port: "80",
+        path: "/?func=config"
       };
 
-      var datosArduino = require('../datosArduino.js')(urlArdu);
-      
+      grabaArdu(options);
+
       res.redirect('/arduinos');
     };
+
+
+    //===============================================================
+    //===============================================================
+    //===============================================================
+    // Tengo que hacer un solo POST para las grabaciones RESTfull
+    // Una sola funcion que grabe el arduino o lo modifique
+    //===============================================================
+    //===============================================================
+    //===============================================================
+
 
 
   	//POST - Insert a new register in the DB
@@ -62,8 +125,8 @@ module.exports = function(app) {
     		mac:      req.body.mac,
 		    netmask: 	req.body.netmask,
     		gateway: 	req.body.gateway,
-		    dns:      req.body.dns,
-    		uso:      req.body.uso
+        dns:      "1",
+        uso:      "1"
     		});
 
 	  	arduino.save(function (err) {

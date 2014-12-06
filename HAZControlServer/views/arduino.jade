@@ -20,8 +20,6 @@ p
       th MAC
       th NetMask
       th Gateway
-      th DNS
-      th Uso
         each arduino in docs
           tr
             td #{arduino.nombre}
@@ -29,7 +27,5 @@ p
             td #{arduino.mac}
             td #{arduino.netmask}
             td #{arduino.gateway}
-            td #{arduino.dns}
-            td #{arduino.uso}
 - else
   p No tienes ningun Arduino
