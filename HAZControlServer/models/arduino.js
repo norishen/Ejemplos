@@ -10,9 +10,7 @@ var Arduino = new Schema({
     ip: 	{type: String, require: true},
     mac: 	{type: String, require: true},
     netmask:{type: String, require: true},
-    gateway:{type: String, require: true},
-    dns:    {type: String, require: true},
-    uso:    {type: String}
+    gateway:{type: String, require: true}
     });
 
 /*

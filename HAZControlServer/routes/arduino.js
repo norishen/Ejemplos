@@ -67,9 +67,7 @@ module.exports = function(app) {
             ip:       ip,
             mac:      mac,
             netmask:  nm,
-            gateway:  gw,
-            dns:      "1",
-            uso:      "1"
+            gateway:  gw
             });
 
           arduino.save(function (err) {
@@ -124,9 +122,7 @@ module.exports = function(app) {
  			  ip: 		  req.body.ip,
     		mac:      req.body.mac,
 		    netmask: 	req.body.netmask,
-    		gateway: 	req.body.gateway,
-        dns:      "1",
-        uso:      "1"
+    		gateway: 	req.body.gateway
     		});
 
 	  	arduino.save(function (err) {
@@ -154,13 +150,14 @@ module.exports = function(app) {
 
   	//Link routes and functions
   	app.get( '/arduinos', formuTodos );
+
   	app.get( '/arduino/new', formuNuevo );
     app.get( '/arduino/rescan', formuRescan );
 
   	// Links operativa
+    app.post( '/arduino/new', creaNuevo );
     app.post( '/arduino/rescan', rescanArdus );
     app.get( '/arduino/:id', buscaUno );
-    app.post( '/arduino', creaNuevo );
   	app.put( '/arduino/:id', modificaUno );
   	app.delete( '/arduino/:id', borraUno );
 }
