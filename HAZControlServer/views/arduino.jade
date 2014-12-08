@@ -6,14 +6,17 @@ block content
 h1 #{title}
 p
   div
-    a(href='/arduino/new', class='btn primary') Nuevo Arduino
-    p
-    a(href='/arduino/rescan', class='btn') Rescan
-    p
-    a(href='/arduinos', class='btn') Refresh
+  table(border='1')
+    tr
+      td
+        a(href='/arduino/new', class='btn primary') Nuevo Arduino
+      td
+        a(href='/arduino/rescan', class='btn') Rescan
+      td
+        a(href='/arduinos', class='btn') Refresh
 
 - if(docs.length)
-  table
+  table(border='0')
     tr
       th Nombre
       th IP
@@ -22,10 +25,13 @@ p
       th Gateway
         each arduino in docs
           tr
-            td #{arduino.nombre}
+            td 
+              a(href='/arduino/#{arduino.id}/edit') #{arduino.nombre}
             td #{arduino.ip}
             td #{arduino.mac}
             td #{arduino.netmask}
             td #{arduino.gateway}
+            td
+              a(href='/arduino/#{arduino.id}/del') Borrar
 - else
   p No tienes ningun Arduino

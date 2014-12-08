@@ -1,0 +1,23 @@
+// arduinoDel.js
+//=======================================================================
+//extends layout
+
+h1 #{title}
+
+meta(charset="iso-8859-1")
+form( method='post', action='/arduino/' + arduino.id )
+	input( name='_method', value='DELETE', type='hidden')
+
+	p
+		label(for="nombre") Nombre: #{arduino.nombre}
+	p
+		label(for="ip") IP: #{arduino.ip}
+	p
+		label(for="netmask") Netmask: #{arduino.netmask}
+	p
+		label(for="gateway") gateway: #{arduino.gateway}
+
+	div.actions
+		input(type='submit', value='Borrar', class='btn primary')
+div
+	a(href='/arduinos', class='btn primary') Regresar

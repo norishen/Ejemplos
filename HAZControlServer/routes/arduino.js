@@ -8,7 +8,7 @@ module.exports = function(app) {
     //----- Links routes ------
     //--------------------------------------------------------
   	//View - Return all Arduinos in the DB
-  	function formuTodos(req, res) {
+  	show_index = function(req, res) {
   		Arduino.find({}, function (err, arduino) {
 
     		res.render('arduino.jade', {
@@ -19,20 +19,41 @@ module.exports = function(app) {
   	};
 
     // view for create new Arduino
-  	function formuNuevo(req, res) {
-  		res.render('arduinoNew.jade', {
-    		title: 'Nuevo Arduino'
-  		});
-  	};
-
-    // view for create new Arduino
-    function formuRescan(req, res) {
+    show_rescan = function(req, res) {
       res.render('arduinoRescan.jade', {
         title: 'Rescan Arduinos'
       });
     };
-    //--------------------------------------------------------
 
+    // view for create new Arduino
+    show_new = function(req, res) {
+      res.render('arduinoNew.jade', {
+        title: 'Nuevo Arduino'
+      });
+    };
+
+    // view for create new Arduino
+    show_edit = function(req, res) {
+      Arduino.findById(req.params.id, function (err, arduino) {
+        res.render('arduinoEdit.jade', {
+            title: 'Editar Arduino',
+            arduino: arduino
+        });
+      });
+    };
+
+    show_del = function(req, res) {
+      Arduino.findById(req.params.id, function (err, arduino) {
+        res.render('arduinoDel.jade', {
+            title: 'Borrar Arduino',
+            arduino: arduino
+        });
+      });
+    };
+
+
+    //--------------------------------------------------------
+    //POST - Insert a new register in the DB
     function grabaArdu(options) {
 
       var http = require('http');
@@ -131,33 +152,46 @@ module.exports = function(app) {
     	});
   	};
 
-  	//GET - Return a register with specified ID
-  	function buscaUno(req, res) {
-    	res.send('This is not implemented now');
-  	};
-  
   	//PUT - Update a register already exists
   	function modificaUno(req, res) {
-    	res.send('This is not implemented now');
+    	res.send('Edit: This is not implemented now');
   	};
 
   	//DELETE - Delete a register with specified ID
   	function borraUno(req, res) {
-    	res.send('This is not implemented now');
+      Arduino.findById(req.params.id, function (err, arduino) {
+        if (err) {
+          console.log('Error bucando Arduino a borrar, cod;'+ err);
+        }
+
+        if (!arduino) {
+          return res.send('Invalid ID. (De algún otro lado la sacaste tú...)')
+        }
+
+        // Tenemos el producto, eliminemoslo
+        arduino.remove( function(err) {
+          if (err) {    
+            console.log(err)
+            return next(err)
+          }
+          res.redirect('/arduinos');
+        });
+
+      });
   	};
     //--------------------------------------------------------
 
 
   	//Link routes and functions
-  	app.get( '/arduinos', formuTodos );
-
-  	app.get( '/arduino/new', formuNuevo );
-    app.get( '/arduino/rescan', formuRescan );
+  	app.get( '/arduinos', show_index );
+  	app.get( '/arduino/new', show_new );
+    app.get( '/arduino/rescan', show_rescan );
+    app.get( '/arduino/:id/edit', show_edit );
+    app.get( '/arduino/:id/del', show_del );
 
   	// Links operativa
     app.post( '/arduino/new', creaNuevo );
     app.post( '/arduino/rescan', rescanArdus );
-    app.get( '/arduino/:id', buscaUno );
   	app.put( '/arduino/:id', modificaUno );
   	app.delete( '/arduino/:id', borraUno );
 }
