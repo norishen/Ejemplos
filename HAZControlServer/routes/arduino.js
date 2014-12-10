@@ -19,13 +19,6 @@ module.exports = function(app) {
   	};
 
     // view for create new Arduino
-    show_rescan = function(req, res) {
-      res.render('arduinoRescan.jade', {
-        title: 'Rescan Arduinos'
-      });
-    };
-
-    // view for create new Arduino
     show_new = function(req, res) {
       res.render('arduinoNew.jade', {
         title: 'Nuevo Arduino'
@@ -107,9 +100,9 @@ module.exports = function(app) {
     //--------------------------------------------------------
     //----- Links operativa ------
     //--------------------------------------------------------
-    //POST - Insert a new register in the DB
-    function rescanArdus(req, res) {
-      console.log('rescanArdus: ' + req.body.red );
+  	//POST - Insert a new register in the DB
+  	function creaNuevo(req, res) {
+      console.log('creaNuevo: ' + req.body.red );
 
       var options = {
         host: req.body.red,
@@ -120,40 +113,14 @@ module.exports = function(app) {
       grabaArdu(options);
 
       res.redirect('/arduinos');
-    };
-
-
-    //===============================================================
-    //===============================================================
-    //===============================================================
-    // Tengo que hacer un solo POST para las grabaciones RESTfull
-    // Una sola funcion que grabe el arduino o lo modifique
-    //===============================================================
-    //===============================================================
-    //===============================================================
-
-
-
-  	//POST - Insert a new register in the DB
-  	function creaNuevo(req, res) {
-  		console.log('creaNuevo: ' + req.body);
-
-    	var arduino = new Arduino({
-   			nombre: 	req.body.nombre,
- 			  ip: 		  req.body.ip,
-    		mac:      req.body.mac,
-		    netmask: 	req.body.netmask,
-    		gateway: 	req.body.gateway
-    		});
-
-	  	arduino.save(function (err) {
-    		if (!err) res.redirect('/arduinos'); 
-    		else res.redirect('/arduino/new');
-    	});
   	};
+
 
   	//PUT - Update a register already exists
   	function modificaUno(req, res) {
+
+
+
     	res.send('Edit: This is not implemented now');
   	};
 
@@ -182,16 +149,15 @@ module.exports = function(app) {
     //--------------------------------------------------------
 
 
-  	//Link routes and functions
+  	//Link routes --- formularios ---
   	app.get( '/arduinos', show_index );
+
   	app.get( '/arduino/new', show_new );
-    app.get( '/arduino/rescan', show_rescan );
     app.get( '/arduino/:id/edit', show_edit );
     app.get( '/arduino/:id/del', show_del );
 
-  	// Links operativa
+  	// Links routes --- operativa ---
     app.post( '/arduino/new', creaNuevo );
-    app.post( '/arduino/rescan', rescanArdus );
   	app.put( '/arduino/:id', modificaUno );
   	app.delete( '/arduino/:id', borraUno );
 }

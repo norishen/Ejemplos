@@ -2,36 +2,41 @@
 //=======================================================================
 //extends layout
 
+link(rel='stylesheet', href='/stylesheets/table2.css')
+
 block content
-h1 #{title}
+h2 #{title}
 p
   div
-  table(border='1')
+  table
     tr
       td
-        a(href='/arduino/new', class='btn primary') Nuevo Arduino
+        a(href='/arduino/new', class='btn primary')
+          button(class='btn') Nuevo
       td
-        a(href='/arduino/rescan', class='btn') Rescan
-      td
-        a(href='/arduinos', class='btn') Refresh
+        a(href='/arduinos', class='btn')
+          button(class='btn') Refresh
 
 - if(docs.length)
   table(border='0')
     tr
-      th Nombre
-      th IP
       th MAC
+      th IP
       th NetMask
       th Gateway
+      th Nombre
+      th Borrar 
         each arduino in docs
           tr
-            td 
-              a(href='/arduino/#{arduino.id}/edit') #{arduino.nombre}
+            th 
+              a(href='/arduino/#{arduino.id}/edit') #{arduino.mac}
             td #{arduino.ip}
-            td #{arduino.mac}
             td #{arduino.netmask}
             td #{arduino.gateway}
+            td #{arduino.nombre}
             td
-              a(href='/arduino/#{arduino.id}/del') Borrar
+              a(href='/arduino/#{arduino.id}/del')
+                button(class='btn') Borrar
+
 - else
   p No tienes ningun Arduino

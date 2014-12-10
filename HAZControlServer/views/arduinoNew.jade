@@ -2,38 +2,18 @@
 //=======================================================================
 //extends layout
 
-h1 #{title}
+h2 #{title}
 
 meta(charset="iso-8859-1")
 form( method='post', action='/arduino/new' )
 	div.clearfix
-	label Arduino
+	label Direccion IP
 		div.input
-			input(name='nombre', class='xlarge')
-
-	div.clearfix
-	label IP
-		div.input
-			input(name='ip', class='xlarge')
-
-	div.clearfix
-		label MAC
-		div.input
-			input(name='mac', class='xlarge')
-
-	div.clearfix
-		label Netmask
-		div.input
-			input(name='netmask', class='xlarge')
-
-	div.clearfix
-		label Gateway
-		div.input
-			input(name='gateway', class='xlarge')
+			input(name='red', class='xlarge')
 
 	div.actions
-		input(type='submit', value='Guardar', class='btn primary')
-		button(type='reset', class='btn') Cancelar
+		input(type='submit', value='Añadir', class='btn primary')
 
 div
 	a(href='/arduinos', class='btn primary') Regresar
+

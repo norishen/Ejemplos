@@ -6,11 +6,11 @@ var Schema = mongoose.Schema;
 
 // Definición de modelos
 var Arduino = new Schema({
-    nombre: {type: String, require: true},
-    ip: 	{type: String, require: true},
     mac: 	{type: String, require: true},
+    ip: 	{type: String, require: true},
     netmask:{type: String, require: true},
-    gateway:{type: String, require: true}
+    gateway:{type: String, require: true},
+    nombre: {type: String, require: true}
     });
 
 /*
